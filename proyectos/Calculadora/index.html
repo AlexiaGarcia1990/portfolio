@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,17 +12,33 @@
 
 <h1 class="titulo">Calculadora</h1>
 
+<a href="../../index.html" class="volver">⬅ Volver al Portfolio</a>
+
 <div class="calculadora">
     <input type="text" id="pantalla" readonly>
 
     <div class="botones">
-        <button>7</button><button>8</button><button>9</button><button class="op">/</button>
-        <button>4</button><button>5</button><button>6</button><button class="op">*</button>
-        <button>1</button><button>2</button><button>3</button><button class="op">-</button>
-        <button>0</button><button>.</button><button class="igual">=</button><button class="op">+</button>
+
+        <!-- Números -->
+        <div class="numeros">
+            <button>7</button><button>8</button><button>9</button>
+            <button>4</button><button>5</button><button>6</button>
+            <button>1</button><button>2</button><button>3</button>
+            <button>0</button><button>.</button><button class="igual">=</button>
+        </div>
+
+        <!-- Signos -->
+        <div class="signos">
+            <button class="op">/</button>
+            <button class="op">*</button>
+            <button class="op">-</button>
+            <button class="op">+</button>
+        </div>
+
     </div>
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
+
