@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexia García | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="foto-container">
+            <img src="img/tu-foto.jpg.jpeg" alt="Foto de Alexia" class="foto-perfil">
+        </div>
+
+        <h1>Alexia García</h1>
+        <p class="rol">Desarrolladora de Aplicaciones Multiplataforma</p>
+
+        <!-- BOTÓN QUE ABRE EL MODAL -->
+        <button class="btn-modal" data-modal="modal-sobre-mi">Sobre mí</button>
+    </header>
+
+    <!-- MODAL SOBRE MÍ -->
+    <div id="modal-sobre-mi" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Sobre mí</h2>
+            <p>
+                Soy recién graduada en Desarrollo de Aplicaciones Multiplataforma, hice mis practicas en Indra Sistemas
+                donde trabajé con Python realizando gráficas con Matplotlib, análisis de datos y automatización de procesos. 
+                También colaboré en la validación de resultados y en la elaboración de 
+                informes técnicos para el equipo.
+                
+                Empecé en la programación por curiosidad y hoy es una pasión que me impulsa a mejorar cada día.
+                Busco mi primera oportunidad laboral para demostrar mis capacidades, aprender de profesionales y contribuir.
+            </p>
+
+            <p><strong>Correo:</strong> alexia.g.g4@hotmail.com</p>
+            <p><strong>LinkedIn:</strong> https://www.linkedin.com/in/alexia-garcía-gonzález</p>
+        </div>
+    </div>
+
+    <!-- TECNOLOGÍAS -->
+    <section id="tecnologias">
+        <h2>Tecnologías</h2>
+
+        <div class="tech-icons">
+            <img src="iconos/python.png" class="icono">
+            <img src="iconos/html.png" class="icono">
+            <img src="iconos/css.png" class="icono">
+            <img src="iconos/git.png" class="icono">
+            <img src="iconos/visual.png" class="icono">
+        </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+        <h2>Proyectos</h2>
+
+        <!-- Proyecto Tres en Raya -->
+        <div class="proyecto">
+            <h3>Tres en Raya</h3>
+            <p>Juego clásico hecho con HTML, CSS y JavaScript.</p>
+            <a href="proyectos/Tres_En_Raya/index.html" target="_blank" class="btn-proyecto">
+                Ver Tres en Raya
+            </a>
+        </div>
+
+        <!-- Proyecto Calculadora -->
+        <div class="proyecto">
+            <h3>Calculadora</h3>
+            <p>Calculadora funcional hecha con HTML, CSS y JavaScript.</p>
+            <a href="proyectos/Calculadora/index.html" target="_blank" class="btn-proyecto">
+                Ver Calculadora
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 Alexia García
+    </footer>
+
+    <!-- JAVASCRIPT MODALES -->
+    <script>
+        // Abrir modales
+        document.querySelectorAll('.btn-modal').forEach(boton => {
+            boton.addEventListener('click', () => {
+                const modalID = boton.getAttribute('data-modal');
+                document.getElementById(modalID).style.display = 'flex';
+            });
+        });
+
+        // Cerrar modales
+        document.querySelectorAll('.cerrar').forEach(cerrar => {
+            cerrar.addEventListener('click', () => {
+                cerrar.parentElement.parentElement.style.display = 'none';
+            });
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        window.addEventListener('click', (e) => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
