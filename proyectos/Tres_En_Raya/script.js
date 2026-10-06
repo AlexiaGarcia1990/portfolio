@@ -1,41 +1,68 @@
-const celdas = document.querySelectorAll(".celda");
-const reiniciar = document.getElementById("reiniciar");
+const tablero = document.getElementById("tablero");
+const mensaje = document.getElementById("mensaje");
+const reiniciarBtn = document.getElementById("reiniciar");
+
 let turno = "X";
-let tablero = ["", "", "", "", "", "", "", "", ""];
+let casillas = ["", "", "", "", "", "", "", "", ""];
+let juegoActivo = true;
 
-function comprobarGanador() {
-    const combinaciones = [
-        [0,1,2], [3,4,5], [6,7,8],
-        [0,3,6], [1,4,7], [2,5,8],
-        [0,4,8], [2,4,6]
-    ];
-
-    for (let c of combinaciones) {
-        if (tablero[c[0]] && tablero[c[0]] === tablero[c[1]] && tablero[c[1]] === tablero[c[2]]) {
-            alert(`Ganó ${tablero[c[0]]}!`);
-            return true;
-        }
-    }
-    return false;
+function crearTablero() {
+    tablero.innerHTML = "";
+    casillas.forEach((valor, i) => {
+        const div = document.createElement("div");
+        div.classList.add("casilla");
+        div.dataset.index = i;
+        div.textContent = valor;
+        div.addEventListener("click", marcar);
+        tablero.appendChild(div);
+    });
 }
 
-celdas.forEach(celda => {
-    celda.addEventListener("click", () => {
-        const index = celda.dataset.index;
+function marcar(e) {
+    const index = e.target.dataset.index;
 
-        if (tablero[index] === "") {
-            tablero[index] = turno;
-            celda.textContent = turno;
+    if (!juegoActivo || casillas[index] !== "") return;
 
-            if (!comprobarGanador()) {
-                turno = turno === "X" ? "O" : "X";
-            }
-        }
-    });
-});
+    casillas[index] = turno;
+    e.target.textContent = turno;
 
-reiniciar.addEventListener("click", () => {
-    tablero = ["", "", "", "", "", "", "", "", ""];
+    if (verificarGanador()) {
+        mensaje.textContent = `¡${turno} ha ganado!`;
+        juegoActivo = false;
+        return;
+    }
+
+    if (!casillas.includes("")) {
+        mensaje.textContent = "¡Empate!";
+        juegoActivo = false;
+        return;
+    }
+
+    turno = turno === "X" ? "O" : "X";
+    mensaje.textContent = `Turno de ${turno}`;
+}
+
+function verificarGanador() {
+    const combinaciones = [
+        [0,1,2], [3,4,5], [6,7,8], // filas
+        [0,3,6], [1,4,7], [2,5,8], // columnas
+        [0,4,8], [2,4,6]           // diagonales
+    ];
+
+    return combinaciones.some(([a,b,c]) =>
+        casillas[a] &&
+        casillas[a] === casillas[b] &&
+        casillas[a] === casillas[c]
+    );
+}
+
+reiniciarBtn.addEventListener("click", () => {
+    casillas = ["", "", "", "", "", "", "", "", ""];
     turno = "X";
-    celdas.forEach(c => c.textContent = "");
+    juegoActivo = true;
+    mensaje.textContent = "Turno de X";
+    crearTablero();
 });
+
+crearTablero();
+mensaje.textContent = "Turno de X";
